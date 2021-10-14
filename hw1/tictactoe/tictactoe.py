@@ -14,7 +14,10 @@ class TicTacToe:
                        for _ in range(self._board_size)]
         self._border_line = "+---" * self._board_size + "+"
         self._board_line = "| {} " * self._board_size + "|"
+        # list of tuples: (turn_num, player_num, char, row_pos, col_pos)
         self._game_log = []
+        self._is_first_player_turn = True
+        self._current_turn_num = 0
 
     def _show_board(self):
         """Show Tic Tac Toe board in cli"""
@@ -56,6 +59,20 @@ class TicTacToe:
             )
         return char, row_pos, col_pos
 
+    def _set_turn(self, char: str, row_pos: int, col_pos: int):
+        self._board[row_pos][col_pos] = char
+        play = (
+            self._current_turn_num,
+            1 if self._is_first_player_turn else 2,
+            char,
+            row_pos,
+            col_pos,
+        )
+        self._game_log.append(play)
+        # change turn
+        self._is_first_player_turn = not self._is_first_player_turn
+        self._current_turn_num += 1
+
     def _win(self):
         """In case if somebody has won"""
         pass
@@ -85,6 +102,10 @@ class TicTacToe:
             user_input = input()
             try:
                 char, row_pos, col_pos = self._validate_input(user_input)
+                self._set_turn(char, row_pos, col_pos)
             except TicTacToeBadInput as bad_input_e:
                 print(str(bad_input_e))
                 continue
+            except TicTacToeGameFinished as game_finished_e:
+                print(str(game_finished_e))
+                break
