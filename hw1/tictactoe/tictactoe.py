@@ -60,6 +60,15 @@ class TicTacToe:
             )
         return row_pos, col_pos
 
+    def _print_game_log(self):
+        is_first_player_turn = True
+        print("Game log:")
+        for row_pos, col_pos in self._game_log:
+            player_id = 1 if is_first_player_turn else 2
+            print(f"Player#{player_id}, "
+                  f"row_pos: {row_pos}, col_pos: {col_pos}")
+            is_first_player_turn = not is_first_player_turn
+
     def _set_turn(self, row_pos: int, col_pos: int):
         self._board[row_pos][col_pos] \
             = self.CROSS_CHAR \
@@ -113,8 +122,7 @@ class TicTacToe:
             f"Player #{player_id} and '{char}' wins!"
         )
 
-    @staticmethod
-    def _draw():
+    def _draw(self):
         """In case if it had been a draw"""
         print("It's a draw. No one wins!")
 
@@ -212,8 +220,10 @@ class TicTacToe:
             except TicTacToeGameFinished as game_finished_e:
                 print(str(game_finished_e))
                 self.show_board()
+                self._print_game_log()
                 break
         if len(self._game_log) >= self._board_size ** 2 \
                 and len(self._game_log) > 1:
             self._draw()
             self.show_board()
+            self._print_game_log()
