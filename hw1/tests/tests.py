@@ -20,12 +20,14 @@ class TestTicTacToe(unittest.TestCase):
 
     # TODO: update this test
     @mock.patch("builtins.input", side_effect=["2 2\n"])
-    @mock.patch.object(TicTacToe, "_greetings")
-    def test_game_start(self, mock_, _):
+    @mock.patch.object(TicTacToe, "_prompt_for_input")
+    @mock.patch.object(TicTacToe, "show_board")
+    def test_game_start(self, mock_show_board, mock_prompt, _):
         self.game._board[0][0] = "X"
         self.game._board[1][1] = "X"
         self.game.start_game()
-        mock_.assert_called("_greetings")
+        mock_show_board.assert_called()
+        mock_prompt.assert_called()
 
 
 if __name__ == '__main__':

@@ -4,7 +4,7 @@ In order to start Tic Tac Toe game one should use:
 ```shell
 python3 t3_game.py -n <board_size>
 ```
-Default board_size = 3.
+Default ```board_size = 3```.
 
 Board looks like this:
 ```shell
