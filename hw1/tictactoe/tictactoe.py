@@ -147,7 +147,16 @@ class TicTacToe:
         print(prompt_str)
 
     def _check_winner(self):
-        """Check if we have a winner"""
+        """Check if we have a winner
+        Iterating over board and creating statistics dict.
+        statistics consists of list (row or col)
+        or number (for diagonal or antidiagonal).
+        Every number in list referred to amount of symbols.
+        For example: statistics["X"]["row"][2] = 2 -> row 2 consists of 2 "X".
+        For diagonal one has only one number.
+        For example: statistics["O"]["diag"] = 3
+        -> main diagonal consists of 3 "O".
+        """
         statistics = {
             "X": {
                 "row": [
