@@ -7,6 +7,9 @@ class CustomList(list):
         super().__init__(iterable_data)
 
     def __eq__(self, other):
+        assert isinstance(other, list), (
+            f"Expected list or inherited list obj, but got {type(other)}"
+        )
         return sum(self) == sum(other)
 
     def __add__(self, other):
