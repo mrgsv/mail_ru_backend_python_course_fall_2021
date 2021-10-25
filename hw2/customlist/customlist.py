@@ -19,6 +19,7 @@ class CustomList(list):
         return self._custom_add(other)
 
     def _custom_add(self, other):
+        """Numpy-like custom add"""
         assert isinstance(other, list), (
             f"Expected list or inherited list obj, but got {type(other)}"
         )

@@ -81,7 +81,7 @@ class TestCustomListEq(unittest.TestCase):
 
     def test_eq_raises_assert_if_not_list(self):
         with self.assertRaises(AssertionError):
-            self.left_custom_list == 1
+            _ = self.left_custom_list == 1
 
 
 if __name__ == '__main__':
